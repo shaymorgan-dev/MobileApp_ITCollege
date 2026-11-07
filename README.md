@@ -50,12 +50,12 @@
    ```bash
    flutter run
 
-📸 Скриншоты
+## 📸 Скриншоты
 
 
 👨‍💻 Автор
 Шей Морган (Shay Morgan)
-Студент 1 курса IT-колледжа.
+Студент 2 курса IT-колледжа Foxford.
 
 GitHub: @shaymorgan-dev
 
