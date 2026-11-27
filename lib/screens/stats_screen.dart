@@ -157,59 +157,67 @@ class _StatsScreenState extends State<StatsScreen> {
       child: Column(
         children: [
           SizedBox(
-            height: 218,
+            height: 180,
             child: Stack(
               alignment: Alignment.center,
+              clipBehavior: Clip.hardEdge,
               children: [
-                PieChart(
-                  PieChartData(
-                    sections: List.generate(_data.length, (index) {
-                      final amount = (_data[index]['total'] as num).toDouble();
-                      final percent = amount / _total * 100;
-                      return PieChartSectionData(
-                        value: amount,
-                        color: _chartColors[index % _chartColors.length],
-                        title: percent >= 8 ? '${percent.round()}%' : '',
-                        radius: 82,
-                        titleStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      );
-                    }),
-                    sectionsSpace: 3,
-                    centerSpaceRadius: 58,
+                Positioned.fill(
+                  child: ClipRect(
+                    child: PieChart(
+                      PieChartData(
+                        sections: List.generate(_data.length, (index) {
+                          final amount =
+                              (_data[index]['total'] as num).toDouble();
+                          final percent = amount / _total * 100;
+                          return PieChartSectionData(
+                            value: amount,
+                            color: _chartColors[index % _chartColors.length],
+                            title: percent >= 8 ? '${percent.round()}%' : '',
+                            radius: 68,
+                            titleStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                        }),
+                        sectionsSpace: 3,
+                        centerSpaceRadius: 48,
+                      ),
+                    ),
                   ),
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'ИТОГО',
-                      style: TextStyle(
-                        color: AppColors.muted,
-                        fontSize: 10,
-                        letterSpacing: 1.1,
-                        fontWeight: FontWeight.w700,
+                IgnorePointer(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'ИТОГО',
+                        style: TextStyle(
+                          color: AppColors.muted,
+                          fontSize: 10,
+                          letterSpacing: 1.1,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      formatMoney(_total),
-                      style: const TextStyle(
-                        color: AppColors.ink,
-                        fontSize: 19,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: -0.5,
+                      const SizedBox(height: 4),
+                      Text(
+                        formatMoney(_total),
+                        style: const TextStyle(
+                          color: AppColors.ink,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: -0.5,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 8),
           Text(
             'Распределение трат за месяц',
             style: Theme.of(context).textTheme.bodyMedium,
